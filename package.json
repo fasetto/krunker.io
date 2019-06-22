@@ -1,0 +1,33 @@
+{
+  "name": "@fasetto/krunker.io",
+  "version": "0.1.2",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "node ./tests/test.js",
+    "clean": "rm -rf ./lib"
+  },
+  "files": [
+      "lib",
+      "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flexdinesh/npm-module-boilerplate.git"
+  },
+  "keywords": [
+    "krunker.io",
+    "krunker",
+    "krunker api"
+  ],
+  "author": "SERKAN BIRCAN <serkanbircan21@yandex.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flexdinesh/npm-module-boilerplate/issues"
+  },
+  "homepage": "https://github.com/flexdinesh/npm-module-boilerplate#readme",
+  "dependencies": {
+    "msgpack-lite": "^0.1.26",
+    "ws": "^7.0.1"
+  }
+}
