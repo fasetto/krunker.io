@@ -30,6 +30,21 @@ UnOfficial Api for interacting with the [Krunker.io Social Page](https://krunker
 $ npm i krunker.js
 ```
 
+## Getting Started
+```js
+const Api = require("@fasetto/krunker.io")
+
+const Krunker = new Api();
+
+const PrintUserData = async () =>
+{
+    const user = await Krunker.GetProfile("fasetto");
+    console.log(user);
+}
+
+PrintUserData();
+```
+
 ## Contact
 
 Discord: fasetto#5885
