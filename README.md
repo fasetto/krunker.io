@@ -1,7 +1,7 @@
 <div align="center">
 	<br>
   	<p>
-		<a href="https://krunker.io"><img src="https://i.imgur.com/qvTc8OA.png" width="546" alt="Krunker.js"></a>
+		<a href="https://krunker.io"><img src="https://i.imgur.com/qvTc8OA.png" width="546"></a>
   	</p>
   	<br>
   	<p>
