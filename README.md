@@ -27,7 +27,7 @@ UnOfficial Api for interacting with the [Krunker.io Social Page](https://krunker
 ## Setup and Installation
 
 ```
-$ npm i krunker.js
+$ npm i @fasetto/krunker.io
 ```
 
 ## Getting Started
