@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flexdinesh/npm-module-boilerplate.git"
+    "url": "git+https://github.com/fasetto/krunker.io.git"
   },
   "keywords": [
     "krunker.io",
@@ -23,9 +23,9 @@
   "author": "SERKAN BIRCAN <serkanbircan21@yandex.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/flexdinesh/npm-module-boilerplate/issues"
+    "url": "https://github.com/fasetto/krunker.io/issues"
   },
-  "homepage": "https://github.com/flexdinesh/npm-module-boilerplate#readme",
+  "homepage": "https://github.com/fasetto/krunker.io#readme",
   "dependencies": {
     "msgpack-lite": "^0.1.26",
     "ws": "^7.0.1"
