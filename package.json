@@ -1,6 +1,6 @@
 {
   "name": "@fasetto/krunker.io",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "",
   "main": "./src/index.js",
   "scripts": {
@@ -8,8 +8,8 @@
     "clean": "rm -rf ./lib"
   },
   "files": [
-      "lib",
-      "src"
+    "lib",
+    "src"
   ],
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
   "homepage": "https://github.com/fasetto/krunker.io#readme",
   "dependencies": {
     "msgpack-lite": "^0.1.26",
+    "request": "^2.88.0",
     "ws": "^7.0.1"
   }
 }
