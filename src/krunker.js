@@ -1,5 +1,6 @@
 const Api = require("./api.js");
 const { encode, decode } =  require('msgpack-lite');
+const request = require("request");
 
 const OrderBy =
 {
@@ -82,6 +83,66 @@ class Krunker extends Api
                 resolve(data);
             }
         });
+    }
+
+    GetGameInfo(gameId)
+    {
+        return new Promise((resolve, reject) =>
+        {
+            try
+            {
+                request(`https://matchmaker.krunker.io/game-info?game=${gameId}`, (err, res, body) =>
+                {
+                    const json = JSON.parse(body);
+                    const gameInfo =
+                    {
+                        region: this.GetRegion(json.region.split("-")[1]),
+                        players: `${json.clients}/${json.maxClients}`,
+                        map: json.data.i,
+                        custom: json.data.cs
+                    }
+
+                    resolve(gameInfo);
+                });
+            }
+            catch (e)
+            {
+                console.log(e);
+                reject(new Error("Game not found!"));
+            }
+
+        });
+    }
+
+    GetRegion(regionStr)
+    {
+        let region;
+
+        switch (regionStr) {
+            case "sv":
+                region = "Silicon Valley";
+                break;
+            case "mia":
+                region = "Miami";
+                break;
+            case "fra":
+                region = "Frankfurt";
+                break;
+            case "tok":
+                region = "Tokyo";
+                break;
+            case "sin":
+                region = "Singapore";
+                break;
+            case "syd":
+                region = "Sydney";
+                break;
+            default:
+                region = regionStr;
+                break;
+        }
+
+        return region;
     }
 
     GetLevel(data)
