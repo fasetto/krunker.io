@@ -42,7 +42,7 @@ const PrintUserData = async () =>
 {
     try
     {
-        const user = await Krunker.GetProfile("needmoney90");
+        const user = await Krunker.GetProfile("fasetto");
         console.log(user);
     }
     catch (e)
@@ -52,6 +52,26 @@ const PrintUserData = async () =>
     }
 
 }
+
+// {
+//   name:'fasetto',
+//   id:124403,
+//   score:842665,
+//   level:27,
+//   kills:7905,
+//   deaths:5759,
+//   kdr:'1.37',
+//   spk:'106.60',
+//   totalGamesPlayed:997,
+//   wins:410,
+//   loses:587,
+//   wl:'0.41',
+//   playTime:'3d 9h 33m',
+//   funds:113,
+//   clan:'PUSU',
+//   featured:'No',
+//   hacker:'Negative'
+// }
 
 PrintUserData();
 ```
@@ -76,6 +96,35 @@ const PrintLeaderboard = async () =>
 
 PrintLeaderboard();
 ```
+
+### Game Informations
+```js
+const { Krunker: Api, OrderBy } = require("@fasetto/krunker.io")
+
+const PrintGameInfo = async () =>
+{
+    try
+    {
+        const gameInfo = await Krunker.GetGameInfo("FRA:piucd");
+        console.log(gameInfo);
+
+    }
+    catch (e)
+    {
+        console.log(e.message);
+    }
+}
+
+// {
+//   region:'Frankfurt',
+//   players:'8/8',
+//   map:'ctf_Sandstorm',
+//   custom:false
+// }
+
+PrintGameInfo();
+```
+
 
 ## Contact
 
