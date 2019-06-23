@@ -31,6 +31,8 @@ $ npm i @fasetto/krunker.io
 ```
 
 ## Getting Started
+
+### Profile Informations
 ```js
 const Api = require("@fasetto/krunker.io")
 
@@ -43,6 +45,27 @@ const PrintUserData = async () =>
 }
 
 PrintUserData();
+```
+
+### Leaderboard Informations
+```js
+const Api = require("@fasetto/krunker.io")
+
+const PrintLeaderboard = async () =>
+{
+    try
+    {
+        const leaderboard = await Krunker.GetLeaderboard(OrderBy.Funds)
+        console.log(leaderboard);
+
+    }
+    catch (e)
+    {
+        console.log(e.message);
+    }
+}
+
+PrintLeaderboard();
 ```
 
 ## Contact
