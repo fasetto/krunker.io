@@ -34,7 +34,7 @@ $ npm i @fasetto/krunker.io
 
 ### Profile Informations
 ```js
-const Api = require("@fasetto/krunker.io")
+const { Krunker: Api, OrderBy } = require("@fasetto/krunker.io")
 
 const Krunker = new Api();
 
@@ -58,7 +58,7 @@ PrintUserData();
 
 ### Leaderboard Informations
 ```js
-const Api = require("@fasetto/krunker.io")
+const { Krunker: Api, OrderBy } = require("@fasetto/krunker.io")
 
 const PrintLeaderboard = async () =>
 {
