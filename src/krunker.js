@@ -1,6 +1,16 @@
 const Api = require("./api.js");
 const { encode, decode } =  require('msgpack-lite');
 
+const OrderBy =
+{
+    Funds: "funds",
+    Clans: "clan",
+    Level: "score",
+    Kills: "kills",
+    Time: "timeplayed",
+    Wins: "wins"
+}
+
 class Krunker extends Api
 {
     GetProfile(username)
@@ -49,6 +59,31 @@ class Krunker extends Api
         });
     }
 
+    GetLeaderboard(orderby)
+    {
+        this.connect();
+
+        return new Promise((resolve, reject) =>
+        {
+            this.socket.onopen = () =>
+            {
+                const data = encode([ 'r', [ 'leaders', orderby, '', null ] ]);
+                this.socket.send(data.buffer);
+            }
+
+            this.socket.onmessage = buff =>
+            {
+                const data = decode(new Uint8Array(buff.data))[1][2];
+                this.disconnect();
+
+                if (!data)
+                    return reject(new Error("Something went wrong!"));
+
+                resolve(data);
+            }
+        });
+    }
+
     GetLevel(data)
     {
         const score = data.player_score;
@@ -91,4 +126,4 @@ class Krunker extends Api
 
 }
 
-module.exports = Krunker;
+module.exports = { Krunker, OrderBy }
