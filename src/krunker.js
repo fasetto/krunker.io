@@ -20,6 +20,9 @@ class Krunker extends Api
                 const data = decode(new Uint8Array(buff.data))[1][2];
                 this.disconnect();
 
+                if (!data)
+                    return reject(new Error("User not found!"));
+
                 const profile_info =
                 {
                     name: data.player_name,
@@ -40,6 +43,7 @@ class Krunker extends Api
                     featured: data.player_featured ? data.player_featured : 'No',
                     hacker: data.player_hack ? "Positive" : 'Negative'
                 };
+
                 resolve(profile_info);
             }
         });
