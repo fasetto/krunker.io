@@ -38,9 +38,9 @@ class Krunker extends Api
                     loses: data.player_games_played - data.player_wins,
                     wl: this.GetWL(data),
                     playTime: this.GetPlayTime(data),
-                    krunkies: data.player_funds,
+                    funds: data.player_funds,
                     clan: data.player_clan ? data.player_clan : 'No Clan',
-                    featured: data.player_featured ? data.player_featured : 'No',
+                    featured: data.player_featured ? "Yes" : 'No',
                     hacker: data.player_hack ? "Positive" : 'Negative'
                 };
 
