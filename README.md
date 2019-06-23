@@ -40,8 +40,17 @@ const Krunker = new Api();
 
 const PrintUserData = async () =>
 {
-    const user = await Krunker.GetProfile("fasetto");
-    console.log(user);
+    try
+    {
+        const user = await Krunker.GetProfile("needmoney90");
+        console.log(user);
+    }
+    catch (e)
+    {
+        // console.log(e.message);
+        console.log("Sorry ):\nWe couldn't find that user!");
+    }
+
 }
 
 PrintUserData();
