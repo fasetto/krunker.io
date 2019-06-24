@@ -71,7 +71,9 @@ const PrintUserData = async () =>
 //   funds:113,
 //   clan:'PUSU',
 //   featured:'No',
-//   hacker:'Negative'
+//   hacker:false
+//   following: 1,
+//   followers: 0
 // }
 
 PrintUserData();
