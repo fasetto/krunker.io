@@ -26,13 +26,19 @@ class Krunker extends Api
                 this.socket.send(data.buffer);
             }
 
+            this.socket.onerror = (e) =>
+            {
+                this.socket.terminate();
+                return reject(new Error("Currently servers are unreachable!"));
+            }
+
             this.socket.onmessage = buff =>
             {
                 const data = decode(new Uint8Array(buff.data))[1][2];
                 this.disconnect();
 
-                if (!data)
-                    return reject(new Error("User not found!"));
+                if (!data.player_name)
+                    return reject(new Error(`Couldn't get stats for user ${username}`));
 
                 const profile_info =
                 {
@@ -51,9 +57,11 @@ class Krunker extends Api
                     wl: this.GetWL(data),
                     playTime: this.GetPlayTime(data),
                     funds: data.player_funds,
-                    clan: data.player_clan ? data.player_clan : 'No Clan',
-                    featured: data.player_featured ? "Yes" : 'No',
-                    hacker: data.player_hack ? "Positive" : 'Negative'
+                    clan: data.player_clan ? data.player_clan : false,
+                    featured: data.player_featured ? "Yes" : "No",
+                    hacker: data.player_hack ? true : false,
+                    following: data.player_following || 0,
+                    followers: data.player_followed || 0
                 };
 
                 resolve(profile_info);
@@ -90,27 +98,23 @@ class Krunker extends Api
     {
         return new Promise((resolve, reject) =>
         {
-            try
+            request(`https://matchmaker.krunker.io/game-info?game=${gameId}`, (err, res, body) =>
             {
-                request(`https://matchmaker.krunker.io/game-info?game=${gameId}`, (err, res, body) =>
-                {
-                    const json = JSON.parse(body);
-                    const gameInfo =
-                    {
-                        region: this.GetRegion(json.region.split("-")[1]),
-                        players: `${json.clients}/${json.maxClients}`,
-                        map: json.data.i,
-                        custom: json.data.cs
-                    }
+                const json = JSON.parse(body);
 
-                    resolve(gameInfo);
-                });
-            }
-            catch (e)
-            {
-                console.log(e);
-                reject(new Error("Game not found!"));
-            }
+                if (!json.region)
+                    return reject(new Error("Game not found!"));
+
+                const gameInfo =
+                {
+                    region: this.GetRegion(json.region.slice(-2)),
+                    players: `${json.clients}/${json.maxClients}`,
+                    map: json.data.i,
+                    custom: json.data.cs
+                }
+
+                resolve(gameInfo);
+            });
 
         });
     }
@@ -123,19 +127,46 @@ class Krunker extends Api
             case "sv":
                 region = "Silicon Valley";
                 break;
-            case "mia":
+            case "ia":
+            case "fl":
                 region = "Miami";
                 break;
-            case "fra":
+            case "ra":
                 region = "Frankfurt";
                 break;
-            case "tok":
+            case "js":
+                region = "New Jersey";
+                break;
+            case "il":
+                region = "Chicago";
+                break;
+            case "tx":
+                region = "Dallas";
+                break;
+            case "wa":
+                region = "Seattle";
+                break;
+            case "la":
+                region = "Los Angeles";
+                break;
+            case "ga":
+                region = "Atlanta";
+                break;
+            case "on":
+                region = "London";
+                break;
+            case "ar":
+                region = "Paris";
+                break;
+            case "ok":
+            case "nd":
                 region = "Tokyo";
                 break;
-            case "sin":
+            case "in":
+            case "gp":
                 region = "Singapore";
                 break;
-            case "syd":
+            case "yd":
                 region = "Sydney";
                 break;
             default:

@@ -1,7 +1,7 @@
 <div align="center">
 	<br>
   	<p>
-		<a href="https://krunker.io"><img src="https://i.imgur.com/qvTc8OA.png" width="546"></a>
+		<a href="https://krunker.io"><img src="https://krunker.io/img/krunker_logo_0.png" width="546"></a>
   	</p>
   	<br>
   	<p>
@@ -58,7 +58,7 @@ const PrintUserData = async () =>
 //   id:124403,
 //   score:842665,
 //   level:27,
-//   levelProgress: 55,
+//   levelProgress:55,
 //   kills:7905,
 //   deaths:5759,
 //   kdr:'1.37',

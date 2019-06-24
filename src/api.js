@@ -9,7 +9,10 @@ class Api
 
     connect()
     {
-        this.socket = new WebSocket('wss://krunker_social.krunker.io/ws');
+        this.socket = new WebSocket('wss://krunker_social.krunker.io/ws',
+        {
+            handshakeTimeout: 100,
+        });
     }
 
     disconnect()
