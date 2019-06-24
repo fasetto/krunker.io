@@ -22,7 +22,7 @@ class Krunker extends Api
         {
             this.socket.onopen = () =>
             {
-                const data = encode([ 'r', [ 'profile', username, '', null ] ]);
+                const data = encode([ 'r', [ 'profile', username, "000000", null ] ]);
                 this.socket.send(data.buffer);
             }
 
