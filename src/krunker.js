@@ -40,6 +40,7 @@ class Krunker extends Api
                     id: data.player_id,
                     score: data.player_score,
                     level: this.GetLevel(data),
+                    levelProgress: this.GetLevelProgress(data.player_score),
                     kills: data.player_kills,
                     deaths: data.player_deaths,
                     kdr: this.GetKDR(data),
@@ -149,6 +150,17 @@ class Krunker extends Api
     {
         const score = data.player_score;
         return Math.max(1, Math.floor(0.03 * Math.sqrt(score)));
+    }
+
+    GetLevelProgress(playerScore)
+    {
+        const PROG_VAR = 0.03;
+
+        const t         = PROG_VAR * (Math.sqrt(playerScore));
+        const level     = Math.floor(t);
+        const levelProg = Math.round(100 * (t - level));
+
+        return levelProg;
     }
 
     GetPlayTime(data)
