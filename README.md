@@ -58,6 +58,7 @@ const PrintUserData = async () =>
 //   id:124403,
 //   score:842665,
 //   level:27,
+//   levelProgress: 55,
 //   kills:7905,
 //   deaths:5759,
 //   kdr:'1.37',
