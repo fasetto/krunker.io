@@ -11,7 +11,7 @@ class Api
     {
         this.socket = new WebSocket('wss://krunker_social.krunker.io/ws',
         {
-            handshakeTimeout: 100,
+            handshakeTimeout: 5000,
         });
     }
 
