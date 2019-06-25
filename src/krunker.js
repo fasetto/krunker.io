@@ -1,5 +1,6 @@
-const Api = require("./api.js");
-const { encode, decode } =  require('msgpack-lite');
+const Api = require("./api");
+const { encode, decode } =  require("msgpack-lite");
+const { UserNotFoundError, GameNotFoundError } = require("./error")
 const request = require("request");
 
 const OrderBy =
@@ -14,6 +15,8 @@ const OrderBy =
 
 class Krunker extends Api
 {
+    // TODO: create game/seek game commands
+
     GetProfile(username)
     {
         this.connect();
@@ -29,7 +32,7 @@ class Krunker extends Api
             this.socket.onerror = (e) =>
             {
                 this.socket.terminate();
-                return reject(new Error("Currently servers are unreachable!"));
+                return reject(e);
             }
 
             this.socket.onmessage = buff =>
@@ -37,8 +40,8 @@ class Krunker extends Api
                 const data = decode(new Uint8Array(buff.data))[1][2];
                 this.disconnect();
 
-                if (!data.player_name)
-                    return reject(new Error(`Couldn't get stats for user ${username}`));
+                if(!data || !data.player_name)
+                    return reject(new UserNotFoundError(`Couldn't get stats for user ${username}`));
 
                 const profile_info =
                 {
@@ -103,7 +106,7 @@ class Krunker extends Api
                 const json = JSON.parse(body);
 
                 if (!json.region)
-                    return reject(new Error("Game not found!"));
+                    return reject(new GameNotFoundError("Game not found!"));
 
                 const gameInfo =
                 {
@@ -230,4 +233,4 @@ class Krunker extends Api
 
 }
 
-module.exports = { Krunker, OrderBy }
+module.exports = { Krunker, OrderBy, UserNotFoundError, GameNotFoundError }

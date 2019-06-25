@@ -1,5 +1,4 @@
 <div align="center">
-	<br>
   	<p>
 		<a href="https://krunker.io"><img src="https://krunker.io/img/krunker_logo_0.png" width="546"></a>
   	</p>
@@ -34,7 +33,7 @@ $ npm i @fasetto/krunker.io
 
 ### Profile Informations
 ```js
-const { Krunker: Api, OrderBy } = require("@fasetto/krunker.io")
+const { Krunker: Api, OrderBy, UserNotFoundError } = require("@fasetto/krunker.io")
 
 const Krunker = new Api();
 
@@ -47,31 +46,33 @@ const PrintUserData = async () =>
     }
     catch (e)
     {
-        // console.log(e.message);
-        console.log("Sorry ):\nWe couldn't find that user!");
+        if (e instanceof UserNotFoundError)
+            console.log("Sorry ):\nWe couldn't find that user!");
+        else
+            console.log(e.message);
     }
 
 }
 
 // {
-//   name:'fasetto',
-//   id:124403,
-//   score:842665,
-//   level:27,
-//   levelProgress:55,
-//   kills:7905,
-//   deaths:5759,
-//   kdr:'1.37',
-//   spk:'106.60',
-//   totalGamesPlayed:997,
-//   wins:410,
-//   loses:587,
-//   wl:'0.41',
-//   playTime:'3d 9h 33m',
-//   funds:113,
-//   clan:'PUSU',
-//   featured:'No',
-//   hacker:false
+//   name: 'fasetto',
+//   id: 124403,
+//   score: 846605,
+//   level: 27,
+//   levelProgress: 60,
+//   kills: 7935,
+//   deaths: 5774,
+//   kdr: '1.37',
+//   spk: '106.69',
+//   totalGamesPlayed: 1003,
+//   wins: 413,
+//   loses: 590,
+//   wl: '0.41',
+//   playTime: '3d 9h 44m',
+//   funds: 550,
+//   clan: 'PUSU',
+//   featured: 'No',
+//   hacker: false,
 //   following: 1,
 //   followers: 0
 // }
@@ -102,7 +103,7 @@ PrintLeaderboard();
 
 ### Game Informations
 ```js
-const { Krunker: Api, OrderBy } = require("@fasetto/krunker.io")
+const { Krunker: Api, GameNotFoundError } = require("@fasetto/krunker.io")
 
 const PrintGameInfo = async () =>
 {
@@ -112,17 +113,21 @@ const PrintGameInfo = async () =>
         console.log(gameInfo);
 
     }
+    }
     catch (e)
     {
-        console.log(e.message);
+        if (e instanceof GameNotFoundError)
+            console.log("Game not found!");
+        else
+            console.log(e.message);
     }
 }
 
 // {
-//   region:'Frankfurt',
-//   players:'8/8',
-//   map:'ctf_Sandstorm',
-//   custom:false
+//   region: 'Frankfurt',
+//   players: '8/8',
+//   map: 'ffa_Subzero',
+//   custom: false
 // }
 
 PrintGameInfo();

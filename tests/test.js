@@ -1,5 +1,5 @@
 
-const { Krunker: Api, OrderBy } = require("../src/krunker.js")
+const { Krunker: Api, OrderBy, UserNotFoundError, GameNotFoundError } = require("../src/krunker.js")
 
 const Krunker = new Api();
 
@@ -12,8 +12,10 @@ const PrintUserData = async () =>
     }
     catch (e)
     {
-        // console.log(e.message);
-        console.log("Sorry ):\nWe couldn't find that user!");
+        if (e instanceof UserNotFoundError)
+            console.log("Sorry ):\nWe couldn't find that user!");
+        else
+            console.log(e.message);
     }
 
 }
@@ -36,13 +38,16 @@ const PrintGameInfo = async () =>
 {
     try
     {
-        const gameInfo = await Krunker.GetGameInfo("FRA:piucd");
+        const gameInfo = await Krunker.GetGameInfo("FRA:tbqr2");
         console.log(gameInfo);
 
     }
     catch (e)
     {
-        console.log(e.message);
+        if (e instanceof GameNotFoundError)
+            console.log("Game not found!");
+        else
+            console.log(e.message);
     }
 }
 
