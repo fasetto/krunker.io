@@ -154,7 +154,7 @@ class Krunker extends Api
                 region = "Frankfurt";
                 break;
             case "js":
-                region = "New Jersey";
+                region = "New York";
                 break;
             case "il":
                 region = "Chicago";
