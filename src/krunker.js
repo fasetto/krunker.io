@@ -43,6 +43,17 @@ class Krunker extends Api
                 if(!data || !data.player_name)
                     return reject(new UserNotFoundError(`Couldn't get stats for user ${username}`));
 
+                if(!data.player_stats) {
+                	var s = 0
+                	var h = 0
+                	var n = 0
+                }
+                else {
+                	var s = JSON.parse(data.player_stats)["s"]
+                	var h = JSON.parse(data.player_stats)["h"] || 0
+                	var n = JSON.parse(data.player_stats)["n"] || 0
+                }
+
                 const profile_info =
                 {
                     name: data.player_name,
@@ -64,7 +75,12 @@ class Krunker extends Api
                     featured: data.player_featured ? "Yes" : "No",
                     hacker: data.player_hack ? true : false,
                     following: data.player_following || 0,
-                    followers: data.player_followed || 0
+                    followers: data.player_followed || 0,
+                    shots: s,
+                    hits: h,
+                    nukes: n,
+                    createdDate: data.player_datenew.match("(.*)T")[1],
+                    createdTime: data.player_datenew.match("T(.*).000Z")[1]
                 };
 
                 resolve(profile_info);
