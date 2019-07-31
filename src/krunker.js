@@ -46,12 +46,12 @@ class Krunker extends Api
                 if(!data.player_stats) {
                 	var s = 0
                 	var h = 0
-                	var n = 0
+                    var n = 0
                 }
                 else {
                 	var s = JSON.parse(data.player_stats)["s"]
                 	var h = JSON.parse(data.player_stats)["h"] || 0
-                	var n = JSON.parse(data.player_stats)["n"] || 0
+                    var n = JSON.parse(data.player_stats)["n"] || 0
                 }
 
                 const profile_info =
@@ -80,7 +80,8 @@ class Krunker extends Api
                     hits: h,
                     nukes: n,
                     createdDate: data.player_datenew.match("(.*)T")[1],
-                    createdTime: data.player_datenew.match("T(.*).000Z")[1]
+                    createdTime: data.player_datenew.match("T(.*).000Z")[1],
+                    lastPlayedClass: this.GetClass(JSON.parse(data.player_stats)["c"]),
                 };
 
                 resolve(profile_info);
@@ -154,7 +155,7 @@ class Krunker extends Api
                 region = "Frankfurt";
                 break;
             case "js":
-                region = "New York";
+                region = "New Jersey";
                 break;
             case "il":
                 region = "Chicago";
@@ -195,6 +196,53 @@ class Krunker extends Api
 
         return region;
     }
+
+    GetClass(classId)
+    {
+        let c;
+
+        switch (classId) {
+            case 0:
+                c = "Triggerman";
+                break;
+            case 1:
+                c = "Hunter";
+                break;
+            case 2:
+                c = "Run N Gun";
+                break;
+            case 3:
+                c = "Spray N Pray";
+                break;
+            case 4:
+                c = "Vince";
+                break;
+            case 5:
+                c = "Detective";
+                break;
+            case 6:
+                c = "Marksman";
+                break;
+            case 7:
+                c = "Rocketeer";
+                break;
+            case 8:
+                c = "Agent";
+                break;
+            case 9:
+                c = "Hands";
+                break;
+            case 11:
+                c = "Crossbow";
+                break;
+            default:
+                c = "Triggerman";
+                break;
+        }
+
+        return c;
+    }
+
 
     GetLevel(data)
     {
