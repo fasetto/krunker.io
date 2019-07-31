@@ -47,11 +47,13 @@ class Krunker extends Api
                 	var s = 0
                 	var h = 0
                     var n = 0
+                    var c = -1
                 }
                 else {
                 	var s = JSON.parse(data.player_stats)["s"]
                 	var h = JSON.parse(data.player_stats)["h"] || 0
                     var n = JSON.parse(data.player_stats)["n"] || 0
+                    var c = JSON.parse(data.player_stats)["c"]
                 }
 
                 const profile_info =
@@ -81,7 +83,7 @@ class Krunker extends Api
                     nukes: n,
                     createdDate: data.player_datenew.match("(.*)T")[1],
                     createdTime: data.player_datenew.match("T(.*).000Z")[1],
-                    lastPlayedClass: this.GetClass(JSON.parse(data.player_stats)["c"]),
+                    lastPlayedClass: this.GetClass(c),
                 };
 
                 resolve(profile_info);
@@ -190,7 +192,7 @@ class Krunker extends Api
                 region = "Sydney";
                 break;
             default:
-                region = regionStr;
+                region = "regionStr";
                 break;
         }
 
@@ -202,6 +204,9 @@ class Krunker extends Api
         let c;
 
         switch (classId) {
+            case -1:
+                c = "Triggerman";
+                break;
             case 0:
                 c = "Triggerman";
                 break;
