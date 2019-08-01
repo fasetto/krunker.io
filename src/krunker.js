@@ -5,12 +5,12 @@ const request = require("request");
 
 const OrderBy =
 {
-    Funds: "funds",
-    Clans: "clan",
-    Level: "score",
-    Kills: "kills",
-    Time: "timeplayed",
-    Wins: "wins"
+    Funds: "player_funds",
+    Clans: "player_clan",
+    Level: "player_score",
+    Kills: "player_kills",
+    Time: "player_timeplayed",
+    Wins: "player_wins"
 }
 
 class Krunker extends Api
@@ -99,7 +99,7 @@ class Krunker extends Api
         {
             this.socket.onopen = () =>
             {
-                const data = encode([ 'r', [ 'leaders', orderby, '', null ] ]);
+                const data = encode([ 'r', [ 'leaders', orderby, null, null] ]);
                 this.socket.send(data.buffer);
             }
 
