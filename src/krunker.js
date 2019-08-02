@@ -50,7 +50,7 @@ class Krunker extends Api
                     var c = -1
                 }
                 else {
-                	var s = JSON.parse(data.player_stats)["s"]
+                	var s = JSON.parse(data.player_stats)["s"] || 0
                 	var h = JSON.parse(data.player_stats)["h"] || 0
                     var n = JSON.parse(data.player_stats)["n"] || 0
                     var c = JSON.parse(data.player_stats)["c"]
@@ -84,6 +84,7 @@ class Krunker extends Api
                     createdDate: data.player_datenew.match("(.*)T")[1],
                     createdTime: data.player_datenew.match("T(.*).000Z")[1],
                     lastPlayedClass: this.GetClass(c),
+                    data: data
                 };
 
                 resolve(profile_info);
