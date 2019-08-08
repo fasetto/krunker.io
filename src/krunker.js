@@ -48,12 +48,14 @@ class Krunker extends Api
                 	var h = 0
                     var n = 0
                     var c = -1
+                    var mk = 0
                 }
                 else {
                 	var s = JSON.parse(data.player_stats)["s"] || 0
                 	var h = JSON.parse(data.player_stats)["h"] || 0
                     var n = JSON.parse(data.player_stats)["n"] || 0
-                    var c = JSON.parse(data.player_stats)["c"]
+                    var c = JSON.parse(data.player_stats)["c"] || -1
+                    var mk = JSON.parse(data.player_stats)["mk"] || 0
                 }
 
                 const profile_info =
@@ -81,16 +83,17 @@ class Krunker extends Api
                     shots: s,
                     hits: h,
                     nukes: n,
+                    meleeKills: mk,
                     createdDate: data.player_datenew.match("(.*)T")[1],
                     createdTime: data.player_datenew.match("T(.*).000Z")[1],
-                    lastPlayedClass: this.GetClass(c),
-                    data: data
+                    lastPlayedClass: this.GetClass(c)
                 };
 
                 resolve(profile_info);
             }
         });
     }
+
 
     GetLeaderboard(orderby)
     {
