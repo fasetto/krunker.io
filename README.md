@@ -74,7 +74,13 @@ const PrintUserData = async () =>
 //   featured: 'No',
 //   hacker: false,
 //   following: 1,
-//   followers: 0
+//   followers: 0,
+//   shots: 1453,
+//   hits: 554,
+//   nukes: 0,
+//   createdDate: '2018-07-09',
+//   createdTime: '13:13:25',
+//   lastPlayedClass: 'Vince'
 // }
 
 PrintUserData();

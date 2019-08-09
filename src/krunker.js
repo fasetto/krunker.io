@@ -5,12 +5,12 @@ const request = require("request");
 
 const OrderBy =
 {
-    Funds: "funds",
-    Clans: "clan",
-    Level: "score",
-    Kills: "kills",
-    Time: "timeplayed",
-    Wins: "wins"
+    Funds: "player_funds",
+    Clans: "player_clan",
+    Level: "player_score",
+    Kills: "player_kills",
+    Time: "player_timeplayed",
+    Wins: "player_wins"
 }
 
 class Krunker extends Api
@@ -43,6 +43,21 @@ class Krunker extends Api
                 if(!data || !data.player_name)
                     return reject(new UserNotFoundError(`Couldn't get stats for user ${username}`));
 
+                if(!data.player_stats) {
+                	var s = 0
+                	var h = 0
+                    var n = 0
+                    var c = -1
+                    var mk = 0
+                }
+                else {
+                	var s = JSON.parse(data.player_stats)["s"] || 0
+                	var h = JSON.parse(data.player_stats)["h"] || 0
+                    var n = JSON.parse(data.player_stats)["n"] || 0
+                    var c = JSON.parse(data.player_stats)["c"] || -1
+                    var mk = JSON.parse(data.player_stats)["mk"] || 0
+                }
+
                 const profile_info =
                 {
                     name: data.player_name,
@@ -64,13 +79,21 @@ class Krunker extends Api
                     featured: data.player_featured ? "Yes" : "No",
                     hacker: data.player_hack ? true : false,
                     following: data.player_following || 0,
-                    followers: data.player_followed || 0
+                    followers: data.player_followed || 0,
+                    shots: s,
+                    hits: h,
+                    nukes: n,
+                    meleeKills: mk,
+                    createdDate: data.player_datenew.match("(.*)T")[1],
+                    createdTime: data.player_datenew.match("T(.*).000Z")[1],
+                    lastPlayedClass: this.GetClass(c)
                 };
 
                 resolve(profile_info);
             }
         });
     }
+
 
     GetLeaderboard(orderby)
     {
@@ -80,7 +103,7 @@ class Krunker extends Api
         {
             this.socket.onopen = () =>
             {
-                const data = encode([ 'r', [ 'leaders', orderby, '', null ] ]);
+                const data = encode([ 'r', [ 'leaders', orderby, null, null] ]);
                 this.socket.send(data.buffer);
             }
 
@@ -173,12 +196,62 @@ class Krunker extends Api
                 region = "Sydney";
                 break;
             default:
-                region = regionStr;
+                region = "regionStr";
                 break;
         }
 
         return region;
     }
+
+    GetClass(classId)
+    {
+        let c;
+
+        switch (classId) {
+            case -1:
+                c = "Triggerman";
+                break;
+            case 0:
+                c = "Triggerman";
+                break;
+            case 1:
+                c = "Hunter";
+                break;
+            case 2:
+                c = "Run N Gun";
+                break;
+            case 3:
+                c = "Spray N Pray";
+                break;
+            case 4:
+                c = "Vince";
+                break;
+            case 5:
+                c = "Detective";
+                break;
+            case 6:
+                c = "Marksman";
+                break;
+            case 7:
+                c = "Rocketeer";
+                break;
+            case 8:
+                c = "Agent";
+                break;
+            case 9:
+                c = "Hands";
+                break;
+            case 11:
+                c = "Crossbow";
+                break;
+            default:
+                c = "Triggerman";
+                break;
+        }
+
+        return c;
+    }
+
 
     GetLevel(data)
     {
