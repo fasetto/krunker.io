@@ -244,8 +244,8 @@ class Krunker extends Api
             case 11:
                 c = "Crossbow";
                 break;
-            default:
-                c = "Triggerman";
+            case 12:
+                c = "Commando";
                 break;
         }
 
