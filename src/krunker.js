@@ -68,6 +68,7 @@ class Krunker extends Api
                     kills: data.player_kills,
                     deaths: data.player_deaths,
                     kdr: this.GetKDR(data),
+                    kpg: this.GetKPG(data),
                     spk: this.GetSPK(data),
                     totalGamesPlayed: data.player_games_played,
                     wins: data.player_wins,
@@ -301,6 +302,12 @@ class Krunker extends Api
     {
 		const SPK = data.player_score / data.player_kills || 0;
 		return SPK.toFixed(2);
+    }
+
+    GetKPG(data)
+    {
+        const KPG = data.player_kills / data.player_games_played || 0;
+        return KPG.toFixed(2);
     }
 
 
