@@ -87,7 +87,8 @@ class Krunker extends Api
                     meleeKills: mk,
                     createdDate: data.player_datenew.match("(.*)T")[1],
                     createdTime: data.player_datenew.match("T(.*).000Z")[1],
-                    lastPlayedClass: this.GetClass(c)
+                    lastPlayedClass: this.GetClass(c),
+                    elo: data.player_elo
                 };
 
                 resolve(profile_info);
