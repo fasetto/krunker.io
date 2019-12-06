@@ -83,7 +83,9 @@ const PrintUserData = async () =>
 //   createdDate: '2018-07-09',
 //   createdTime: '13:13:25',
 //   lastPlayedClass: 'Vince',
-//   elo: 0
+//   elo: 0,
+//   elo2: 0,
+//   elo4: 0
 // }
 
 PrintUserData();
