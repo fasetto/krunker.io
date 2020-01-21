@@ -10,7 +10,10 @@ const OrderBy =
     Level: "player_score",
     Kills: "player_kills",
     Time: "player_timeplayed",
-    Wins: "player_wins"
+    Wins: "player_wins",
+    Elo: "player_elo",
+    Elo2: "player_elo2",
+    Elo4: "player_elo4"
 }
 
 class Krunker extends Api
@@ -87,7 +90,10 @@ class Krunker extends Api
                     meleeKills: mk,
                     createdDate: data.player_datenew.match("(.*)T")[1],
                     createdTime: data.player_datenew.match("T(.*).000Z")[1],
-                    lastPlayedClass: this.GetClass(c)
+                    lastPlayedClass: this.GetClass(c),
+                    elo: data.player_elo || 0,
+                    elo2: data.player_elo2 || 0,
+                    elo4: data.player_elo4 || 0
                 };
 
                 resolve(profile_info);

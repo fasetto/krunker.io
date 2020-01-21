@@ -63,6 +63,7 @@ const PrintUserData = async () =>
 //   kills: 7935,
 //   deaths: 5774,
 //   kdr: '1.37',
+//   kpg: '7.94',
 //   spk: '106.69',
 //   totalGamesPlayed: 1003,
 //   wins: 413,
@@ -78,9 +79,13 @@ const PrintUserData = async () =>
 //   shots: 1453,
 //   hits: 554,
 //   nukes: 0,
+//   meleeKills: 0,
 //   createdDate: '2018-07-09',
 //   createdTime: '13:13:25',
-//   lastPlayedClass: 'Vince'
+//   lastPlayedClass: 'Vince',
+//   elo: 0,
+//   elo2: 0,
+//   elo4: 0
 // }
 
 PrintUserData();
