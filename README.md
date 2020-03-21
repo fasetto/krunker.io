@@ -99,7 +99,7 @@ const PrintLeaderboard = async () =>
 {
     try
     {
-        const leaderboard = await Krunker.GetLeaderboard(OrderBy.Funds)
+        const leaderboard = await Krunker.GetLeaderboard(OrderBy.Funds);
         console.log(leaderboard);
 
     }
@@ -122,7 +122,6 @@ const PrintClan = async () =>
     {
         const clan = await Krunker.GetClan("24/7");
         console.log(clan);
-
     }
     catch (e)
     {
@@ -146,8 +145,6 @@ const PrintGameInfo = async () =>
     {
         const gameInfo = await Krunker.GetGameInfo("FRA:piucd");
         console.log(gameInfo);
-
-    }
     }
     catch (e)
     {
