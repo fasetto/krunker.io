@@ -126,6 +126,38 @@ class Krunker extends Api
             }
         });
     }
+    
+    GetClan(clanName)
+    {
+        this.connect();
+
+        return new Promise((resolve, reject) =>
+        {
+            this.socket.onopen = () =>
+            {
+                const data = encode([ "r", [ "clan", clanName, null, null] ]);
+                this.socket.send(data.buffer);
+            }
+
+            this.socket.onmessage = buff =>
+            {
+                const data = decode(new Uint8Array(buff.data))[1][2];
+
+                // This is needed because for some reason getting the clan takes a long time
+                // And there are these "pi" packets that come before the one we want with all the data. This will ignore those "pi" packets.
+                if (!(data === undefined)) {
+                    this.disconnect();
+
+                    if (!data) {
+                        return reject(new Error("Something went wrong!"));
+                    }
+                    else {
+                        resolve(data);
+                    }
+                }
+            }
+        });
+    }
 
     GetGameInfo(gameId)
     {
