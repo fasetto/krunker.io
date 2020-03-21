@@ -7,6 +7,15 @@ class UserNotFoundError extends Error
     }
 }
 
+class ClanNotFoundError extends Error
+{
+    constructor(message)
+    {
+        super(message);
+        this.name = "ClanNotFoundError"
+    }
+}
+
 class GameNotFoundError extends Error
 {
     constructor(message)
@@ -16,4 +25,4 @@ class GameNotFoundError extends Error
     }
 }
 
-module.exports = { UserNotFoundError, GameNotFoundError }
+module.exports = { UserNotFoundError, ClanNotFoundError, GameNotFoundError }

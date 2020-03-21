@@ -1,6 +1,6 @@
 const Api = require("./api");
 const { encode, decode } =  require("msgpack-lite");
-const { UserNotFoundError, GameNotFoundError } = require("./error")
+const { UserNotFoundError, ClanNotFoundError, GameNotFoundError } = require("./error");
 const request = require("request");
 
 const OrderBy =
@@ -149,7 +149,7 @@ class Krunker extends Api
                     this.disconnect();
 
                     if (!data) {
-                        return reject(new Error("Something went wrong!"));
+                        return reject(new ClanNotFoundError("Clan not found!"));
                     }
                     else {
                         resolve(data);
@@ -351,4 +351,4 @@ class Krunker extends Api
 
 }
 
-module.exports = { Krunker, OrderBy, UserNotFoundError, GameNotFoundError }
+module.exports = { Krunker, OrderBy, UserNotFoundError, ClanNotFoundError, GameNotFoundError }
