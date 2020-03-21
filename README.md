@@ -135,6 +135,7 @@ const PrintClan = async () =>
 
 PrintClan();
 ```
+
 ### Game Informations
 ```js
 const { Krunker: Api, GameNotFoundError } = require("@fasetto/krunker.io")
