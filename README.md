@@ -112,6 +112,26 @@ const PrintLeaderboard = async () =>
 PrintLeaderboard();
 ```
 
+### Clan Informations
+```js
+const { Krunker: Api, OrderBy } = require("@fasetto/krunker.io")
+
+const PrintClan = async () =>
+{
+    try
+    {
+        const clan = await Krunker.GetClan("24/7");
+        console.log(clan);
+
+    }
+    catch (e)
+    {
+        console.log(e.message);
+    }
+}
+
+PrintClan();
+```
 ### Game Informations
 ```js
 const { Krunker: Api, GameNotFoundError } = require("@fasetto/krunker.io")
