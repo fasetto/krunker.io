@@ -114,7 +114,7 @@ PrintLeaderboard();
 
 ### Clan Informations
 ```js
-const { Krunker: Api, OrderBy } = require("@fasetto/krunker.io")
+const { Krunker: Api, OrderBy, ClanNotFoundError } = require("@fasetto/krunker.io")
 
 const PrintClan = async () =>
 {
@@ -126,7 +126,10 @@ const PrintClan = async () =>
     }
     catch (e)
     {
-        console.log(e.message);
+        if (e instanceof ClanNotFoundError)
+            console.log("Sorry ):\nWe couldn't find that clan!");
+        else
+            console.log(e.message);
     }
 }
 
