@@ -1,6 +1,6 @@
 {
   "name": "@fasetto/krunker.io",
-  "version": "0.3.1",
+  "version": "0.4.1",
   "description": "UnOfficial Api for interacting the krunker.io social page",
   "main": "./src/index.js",
   "scripts": {
