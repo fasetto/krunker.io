@@ -17,7 +17,7 @@ class Api
 
     disconnect()
     {
-        if (!this.socket && this.socket.readyState !== 1)
+        if (!this.socket || this.socket.readyState !== 1)
             return;
 
         this.socket.close();
