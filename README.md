@@ -99,7 +99,7 @@ const PrintLeaderboard = async () =>
 {
     try
     {
-        const leaderboard = await Krunker.GetLeaderboard(OrderBy.Funds)
+        const leaderboard = await Krunker.GetLeaderboard(OrderBy.Funds);
         console.log(leaderboard);
 
     }
@@ -112,6 +112,29 @@ const PrintLeaderboard = async () =>
 PrintLeaderboard();
 ```
 
+### Clan Informations
+```js
+const { Krunker: Api, OrderBy, ClanNotFoundError } = require("@fasetto/krunker.io")
+
+const PrintClan = async () =>
+{
+    try
+    {
+        const clan = await Krunker.GetClan("24/7");
+        console.log(clan);
+    }
+    catch (e)
+    {
+        if (e instanceof ClanNotFoundError)
+            console.log("Sorry ):\nWe couldn't find that clan!");
+        else
+            console.log(e.message);
+    }
+}
+
+PrintClan();
+```
+
 ### Game Informations
 ```js
 const { Krunker: Api, GameNotFoundError } = require("@fasetto/krunker.io")
@@ -122,8 +145,6 @@ const PrintGameInfo = async () =>
     {
         const gameInfo = await Krunker.GetGameInfo("FRA:piucd");
         console.log(gameInfo);
-
-    }
     }
     catch (e)
     {

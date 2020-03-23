@@ -1,6 +1,6 @@
 const Api = require("./api");
 const { encode, decode } =  require("msgpack-lite");
-const { UserNotFoundError, GameNotFoundError } = require("./error")
+const { UserNotFoundError, ClanNotFoundError, GameNotFoundError } = require("./error");
 const request = require("request");
 
 const OrderBy =
@@ -123,6 +123,38 @@ class Krunker extends Api
                     return reject(new Error("Something went wrong!"));
 
                 resolve(data);
+            }
+        });
+    }
+    
+    GetClan(clanName)
+    {
+        this.connect();
+
+        return new Promise((resolve, reject) =>
+        {
+            this.socket.onopen = () =>
+            {
+                const data = encode([ "r", [ "clan", clanName, null, null] ]);
+                this.socket.send(data.buffer);
+            }
+
+            this.socket.onmessage = buff =>
+            {
+                const data = decode(new Uint8Array(buff.data))[1][2];
+
+                // This is needed because for some reason getting the clan takes a long time
+                // And there are these "pi" packets that come before the one we want with all the data. This will ignore those "pi" packets.
+                if (!(data === undefined)) {
+                    this.disconnect();
+
+                    if (!data) {
+                        return reject(new ClanNotFoundError("Clan not found!"));
+                    }
+                    else {
+                        resolve(data);
+                    }
+                }
             }
         });
     }
@@ -319,4 +351,4 @@ class Krunker extends Api
 
 }
 
-module.exports = { Krunker, OrderBy, UserNotFoundError, GameNotFoundError }
+module.exports = { Krunker, OrderBy, UserNotFoundError, ClanNotFoundError, GameNotFoundError }
