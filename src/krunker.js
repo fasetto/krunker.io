@@ -28,7 +28,7 @@ class Krunker extends Api
         {
             this.socket.onopen = () =>
             {
-                const data = encode([ 'r', [ 'profile', username, "000000", null ] ]);
+                const data = encode(['r', 'profile', username, "000000", null]);
                 this.socket.send(data.buffer);
             }
 
@@ -40,7 +40,7 @@ class Krunker extends Api
 
             this.socket.onmessage = buff =>
             {
-                const data = decode(new Uint8Array(buff.data))[1][2];
+                const data = decode(new Uint8Array(buff.data))[3];
                 this.disconnect();
 
                 if(!data || !data.player_name)
@@ -110,13 +110,13 @@ class Krunker extends Api
         {
             this.socket.onopen = () =>
             {
-                const data = encode([ 'r', [ 'leaders', orderby, null, null] ]);
+                const data = encode(['r', 'leaders', orderby, null, null]);
                 this.socket.send(data.buffer);
             }
 
             this.socket.onmessage = buff =>
             {
-                const data = decode(new Uint8Array(buff.data))[1][2];
+                const data = decode(new Uint8Array(buff.data))[3];
                 this.disconnect();
 
                 if (!data)
@@ -135,18 +135,19 @@ class Krunker extends Api
         {
             this.socket.onopen = () =>
             {
-                const data = encode([ "r", [ "clan", clanName, null, null] ]);
+                const data = encode(['r', 'clan', clanName, null, null]);
                 this.socket.send(data.buffer);
             }
 
             this.socket.onmessage = buff =>
             {
-                const data = decode(new Uint8Array(buff.data))[1][2];
+                let data = decode(new Uint8Array(buff.data));
 
                 // This is needed because for some reason getting the clan takes a long time
-                // And there are these "pi" packets that come before the one we want with all the data. This will ignore those "pi" packets.
-                if (!(data === undefined)) {
+                // And there are these `['pi']` packets that come before the one we want with all the data. This will ignore those "pi" packets.
+                if (data.length > 1) {
                     this.disconnect();
+                    data = data[3];
 
                     if (!data) {
                         return reject(new ClanNotFoundError("Clan not found!"));
