@@ -29,6 +29,6 @@
   "dependencies": {
     "msgpack-lite": "^0.1.26",
     "request": "^2.88.0",
-    "ws": "^7.0.1"
+    "ws": "^8.0.0"
   }
 }
